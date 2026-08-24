@@ -1,0 +1,25 @@
+{
+  "name": "@unrs/resolver-binding-linux-arm-musleabihf",
+  "version": "1.12.2",
+  "cpu": [
+    "arm"
+  ],
+  "main": "resolver.linux-arm-musleabihf.node",
+  "files": [
+    "resolver.linux-arm-musleabihf.node"
+  ],
+  "description": "UnRS Resolver Node API",
+  "homepage": "https://github.com/unrs/unrs-resolver",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unrs/unrs-resolver.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "os": [
+    "linux"
+  ]
+}

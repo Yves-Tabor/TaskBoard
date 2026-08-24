@@ -1,0 +1,25 @@
+{
+  "name": "@unrs/resolver-binding-win32-ia32-msvc",
+  "version": "1.12.2",
+  "cpu": [
+    "ia32"
+  ],
+  "main": "resolver.win32-ia32-msvc.node",
+  "files": [
+    "resolver.win32-ia32-msvc.node"
+  ],
+  "description": "UnRS Resolver Node API",
+  "homepage": "https://github.com/unrs/unrs-resolver",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unrs/unrs-resolver.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "os": [
+    "win32"
+  ]
+}
