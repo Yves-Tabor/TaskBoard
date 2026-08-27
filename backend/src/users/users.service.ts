@@ -14,13 +14,21 @@ export class UsersService {
     return this.userModel.findOne({ email });
   }
 
-  async create(name: string, email: string, password: string) {
-    const user = new this.userModel({
-      name,
-      email,
-      password,
-    });
+  async create(fullName: string, email: string, password: string) {
+  const user = new this.userModel({
+    fullName,
+    email,
+    password,
+  });
 
-    return user.save();
+  user.save();
+    return {
+    message: 'User registered successfully',
+    user: {
+      id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+          },
+        };
   }
 }
