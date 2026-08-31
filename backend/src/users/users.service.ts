@@ -1,31 +1,28 @@
 import { Injectable } from '@nestjs/common';
-
-interface StoredUser {
-  _id: string;
-  fullName: string;
-  email: string;
-  password: string;
-}
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
+import { User, UserDocument } from './user.schema';
 
 @Injectable()
 export class UsersService {
-  private readonly users = new Map<string, StoredUser>();
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async findByEmail(email: string) {
     const normalizedEmail = email.trim().toLowerCase();
-    return [...this.users.values()].find((user) => user.email === normalizedEmail) ?? null;
+    return this.userModel.findOne({ email: normalizedEmail }).exec();
+  }
+
+  async findById(id: string | Types.ObjectId) {
+    return this.userModel.findById(id).exec();
   }
 
   async create(fullName: string, email: string, password: string) {
     const normalizedEmail = email.trim().toLowerCase();
-    const user: StoredUser = {
-      _id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    const user = new this.userModel({
       fullName,
       email: normalizedEmail,
       password,
-    };
-
-    this.users.set(user._id, user);
-    return user;
+    });
+    return user.save();
   }
 }

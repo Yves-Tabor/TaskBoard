@@ -7,12 +7,22 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import type { Request } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { UsersService } from '../users/users.service';
+
+interface AuthenticatedRequest {
+  user: {
+    userId: string;
+    email: string;
+  };
+}
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post('register')
   register(@Body() registerDto: RegisterDto) {
@@ -26,9 +36,16 @@ export class AuthController {
       loginDto.password,
     );
   }
+
   @Get('profile')
   @UseGuards(JwtAuthGuard)
-  getProfile(@Req() req: Request) {
-    return req.user;
+  async getProfile(@Req() req: AuthenticatedRequest) {
+    const user = await this.usersService.findById(req.user.userId);
+    return {
+      userId: req.user.userId,
+      email: req.user.email,
+      fullName: user?.fullName || '',
+    };
   }
 }
+
