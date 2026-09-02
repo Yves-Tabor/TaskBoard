@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: taskboard-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.1
