@@ -6,8 +6,5 @@
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^6.0.0"
-	},
-	"scripts": {
-		"build": "vite build"
 	}
 }
