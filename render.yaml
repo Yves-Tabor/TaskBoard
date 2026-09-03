@@ -2,6 +2,6 @@ services:
   - type: web
     name: taskboard-frontend
     env: static
-    buildCommand: pnpm install --frozen-lockfile --dev && pnpm --filter frontend run build
+    buildCommand: cd frontend && pnpm install --frozen-lockfile --dev && pnpm run build
     publishPath: frontend/dist
     nodeVersion: 24.14.1
